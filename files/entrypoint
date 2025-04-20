@@ -38,17 +38,22 @@ if [ ! -f "$userConfFinalPath" ]; then
         grep -v -E "$reArgSkip" < "$userConfPath" > "$userConfFinalPath"
     fi
 
-    if $startSshd; then
-        # Append users from arguments to final config
-        for user in "$@"; do
-            echo "$user" >> "$userConfFinalPath"
-        done
-    fi
-
     if [ -n "$SFTP_USERS" ]; then
         # Append users from environment variable to final config
         IFS=" " read -r -a usersFromEnv <<< "$SFTP_USERS"
         for user in "${usersFromEnv[@]}"; do
+            IFS=":" read -r -a fields <<< "$user"
+            if [ "${#fields[@]}" -ne 5 ]; then
+                log "FATAL: Invalid user format: $user"
+                exit 4
+            fi
+            echo "$user" >> "$userConfFinalPath"
+        done
+    fi
+
+    if $startSshd; then
+        # Append users from arguments to final config
+        for user in "$@"; do
             echo "$user" >> "$userConfFinalPath"
         done
     fi
