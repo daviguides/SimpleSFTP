@@ -1,11 +1,17 @@
 # SimpleSFTP
 
+![Docker Pulls](https://img.shields.io/docker/pulls/daviguides/simple-sftp)
+![Docker Image Size](https://img.shields.io/docker/image-size/daviguides/simple-sftp/latest)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 > A lightweight, customizable, and secure SFTP server built with Docker and OpenSSH.
 
 <img src="images/diagram.png" alt="Diagram" align="right" style="width: 400px"/>
 
 **SimpleSFTP** provides an easy way to deploy a secure and flexible SFTP server using Docker.
 It supports dynamic user creation via environment variables or config files, with options for password authentication, SSH keys, custom UID/GID, and volume mounting.
+
+📦 Docker Hub: [daviguides/simple-sftp](https://hub.docker.com/r/daviguides/simple-sftp)
 
 ### Features
 
